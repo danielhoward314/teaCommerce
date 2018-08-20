@@ -20,4 +20,4 @@ form div {
   display: inline-block;
 }
 
-@import 'sass-test.scss'
+@import '../components/styles/sass-test.scss'
