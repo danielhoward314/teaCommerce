@@ -1,5 +1,5 @@
 const isDev = process.env.NODE_ENV === 'development'
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: isDev ? 'development' : 'production',
@@ -15,6 +15,14 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   devtool: 'source-map',
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: isDev ? '[name].css' : '[name].[hash].css',
+      chunkFilename: isDev ? '[id].css' : '[id].[hash].css',
+    })
+  ],
   module: {
     rules: [
       {
@@ -23,14 +31,14 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css!sass')
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
       }
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin('public/style.css', {
-        allChunks: true
-    })
-  ]
+  }
 }
