@@ -1,4 +1,5 @@
 const isDev = process.env.NODE_ENV === 'development'
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   mode: isDev ? 'development' : 'production',
@@ -20,7 +21,16 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('css!sass')
       }
     ]
-  }
+  },
+  plugins: [
+    new ExtractTextPlugin('public/style.css', {
+        allChunks: true
+    })
+  ]
 }
