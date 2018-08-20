@@ -1,7 +1,7 @@
 {
   "name": "tea-commerce",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "An Amazon clone that turns e-commerce into tea-commerce.",
   "engines": {
     "node": ">= 7.0.0"
   },
@@ -32,7 +32,7 @@
       "git add"
     ]
   },
-  "author": "Fullstack Academy of Code",
+  "author": "Daniel Howard",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
