@@ -1,5 +1,8 @@
 const isDev = process.env.NODE_ENV === 'development'
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackMd5Hash = require('webpack-md5-hash');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   mode: isDev ? 'development' : 'production',
@@ -15,14 +18,6 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   devtool: 'source-map',
-  plugins: [
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: isDev ? '[name].css' : '[name].[hash].css',
-      chunkFilename: isDev ? '[id].css' : '[id].[hash].css',
-    })
-  ],
   module: {
     rules: [
       {
@@ -33,12 +28,22 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
+          'style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'
         ],
       }
     ]
-  }
+  },
+  plugins: [
+    new CleanWebpackPlugin('dist', {} ),
+    new MiniCssExtractPlugin({
+      filename: 'style.[contenthash].css',
+    }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      hash: true,
+      template: './src/index.html',
+      filename: 'index.html'
+    }),
+    new WebpackMd5Hash()
+  ]
 }
