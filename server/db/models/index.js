@@ -7,32 +7,21 @@ const Shipment = require('./shipment')
 const Transaction = require('./transaction')
 const User = require('./user')
 
+// ASSOCIATIONS
 
-// OrderItem.belongsTo(Product)
-Product.hasMany(OrderItem)
-
-// OrderItem.belongsTo(Order)
 Order.hasMany(OrderItem)
 
-// Order.belongsTo(User)
-User.hasMany(Order)
-
-// PaymentMethod.belongsTo(User)
-User.hasMany(PaymentMethod)
-
-// Review.belongsTo(Product)
+Product.hasMany(OrderItem)
 Product.hasMany(Review)
 
-// Review.belongsTo(User)
-User.hasMany(Review)
-
 Shipment.belongsTo(Order)
-
 Shipment.belongsTo(Transaction)
 
 Transaction.belongsTo(Order)
 
-
+User.hasMany(Order)
+User.hasMany(PaymentMethod)
+User.hasMany(Review)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
