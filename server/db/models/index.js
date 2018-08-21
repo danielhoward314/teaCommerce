@@ -8,22 +8,22 @@ const Transaction = require('./transaction')
 const User = require('./user')
 
 
-OrderItem.belongsTo(Product)
+// OrderItem.belongsTo(Product)
 Product.hasMany(OrderItem)
 
-OrderItem.belongsTo(Order)
+// OrderItem.belongsTo(Order)
 Order.hasMany(OrderItem)
 
-Order.belongsTo(User)
+// Order.belongsTo(User)
 User.hasMany(Order)
 
-PaymentMethod.belongsTo(User)
+// PaymentMethod.belongsTo(User)
 User.hasMany(PaymentMethod)
 
-Review.belongsTo(Product)
+// Review.belongsTo(Product)
 Product.hasMany(Review)
 
-Review.belongsTo(User)
+// Review.belongsTo(User)
 User.hasMany(Review)
 
 Shipment.belongsTo(Order)
